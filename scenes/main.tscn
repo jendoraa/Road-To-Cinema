@@ -1,0 +1,93 @@
+[gd_scene load_steps=17 format=3 uid="uid://b37b4dok5q33e"]
+
+[ext_resource type="Script" uid="uid://bfdlujvds5pwk" path="res://scenes/main.gd" id="1_272bh"]
+[ext_resource type="PackedScene" uid="uid://d2hdh84d4dqb5" path="res://scenes/player/player.tscn" id="2_lquwl"]
+[ext_resource type="PackedScene" uid="uid://c0lbh48njwb8l" path="res://ui/background.tscn" id="4_1bvp3"]
+[ext_resource type="Texture2D" uid="uid://cbbxbqib5cd22" path="res://images/progressbar/progressbar_red.png" id="4_5vw27"]
+[ext_resource type="Texture2D" uid="uid://ciuyofcdchrxl" path="res://images/progressbar/progressbar_green.png" id="5_kek77"]
+[ext_resource type="PackedScene" uid="uid://bs2gxa72jg8ou" path="res://common/motion_background.tscn" id="5_lquwl"]
+[ext_resource type="Texture2D" uid="uid://cnnt8xe6sp2fr" path="res://images/progressbar/progressbar_icon.png" id="6_4c57u"]
+[ext_resource type="PackedScene" uid="uid://di72dokr5v17e" path="res://scenes/spoiler_manager.tscn" id="6_7mycd"]
+[ext_resource type="Script" uid="uid://b5eag03eygg8t" path="res://common/score_bar.gd" id="6_kek77"]
+[ext_resource type="PackedScene" uid="uid://bielxr63cdq2e" path="res://ui/GameOver.tscn" id="10_4c57u"]
+[ext_resource type="PackedScene" uid="uid://2m8hat2tdbvl" path="res://scenes/spoiler/hp_spoiler.tscn" id="11_efxa6"]
+[ext_resource type="PackedScene" uid="uid://cehhwprsxatuo" path="res://ui/pause_menu.tscn" id="12_dg77c"]
+[ext_resource type="Texture2D" uid="uid://b4cij3iute4u3" path="res://images/Menu/menu.png" id="12_ycdy4"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kek77"]
+atlas = ExtResource("4_5vw27")
+region = Rect2(91, 163, 128, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_efxa6"]
+atlas = ExtResource("5_kek77")
+region = Rect2(91, 163, 128, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4c57u"]
+atlas = ExtResource("6_4c57u")
+region = Rect2(80, 150, 32, 32)
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_272bh")
+
+[node name="Player" parent="." instance=ExtResource("2_lquwl")]
+position = Vector2(664, -168.00002)
+
+[node name="SpoilerManager" parent="." instance=ExtResource("6_7mycd")]
+
+[node name="ScoreTimer" type="Timer" parent="."]
+autostart = true
+
+[node name="Progress" type="CanvasLayer" parent="."]
+
+[node name="ScoreBar" type="TextureProgressBar" parent="Progress"]
+unique_name_in_owner = true
+texture_filter = 1
+layout_direction = 2
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -196.0
+offset_top = 280.00006
+offset_right = -67.0293
+offset_bottom = 294.00006
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(4, 3.443)
+texture_under = SubResource("AtlasTexture_kek77")
+texture_progress = SubResource("AtlasTexture_efxa6")
+script = ExtResource("6_kek77")
+
+[node name="IconScore" type="Marker2D" parent="Progress/ScoreBar"]
+position = Vector2(0, 4)
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="Progress/ScoreBar/IconScore"]
+remote_path = NodePath("ProgressbarIcon")
+
+[node name="ProgressbarIcon" type="Sprite2D" parent="Progress/ScoreBar/IconScore/RemoteTransform2D"]
+texture_filter = 1
+position = Vector2(0, -7.688999e-06)
+texture = SubResource("AtlasTexture_4c57u")
+
+[node name="Background" parent="." instance=ExtResource("4_1bvp3")]
+texture_filter = 1
+
+[node name="MotionBackground" parent="." instance=ExtResource("5_lquwl")]
+
+[node name="GameOver" parent="." instance=ExtResource("10_4c57u")]
+visible = false
+
+[node name="HP" type="CanvasLayer" parent="."]
+
+[node name="Control" parent="HP" instance=ExtResource("11_efxa6")]
+
+[node name="Menu" type="Sprite2D" parent="HP"]
+texture_filter = 1
+position = Vector2(640, 361.99994)
+scale = Vector2(4, 3.977778)
+texture = ExtResource("12_ycdy4")
+
+[node name="PauseMenu" parent="." instance=ExtResource("12_dg77c")]
+
+[connection signal="timeout" from="ScoreTimer" to="." method="_on_score_timer_timeout"]

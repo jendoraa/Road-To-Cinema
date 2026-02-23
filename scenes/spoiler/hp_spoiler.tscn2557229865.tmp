@@ -1,0 +1,103 @@
+[gd_scene load_steps=12 format=3 uid="uid://2m8hat2tdbvl"]
+
+[ext_resource type="Script" uid="uid://p76riiu88dev" path="res://scenes/spoiler/hp_spoiler.gd" id="1_j17uf"]
+[ext_resource type="Texture2D" uid="uid://dlvwve1gygl12" path="res://images/Handphone/handphone_on.png" id="1_kdf8y"]
+[ext_resource type="Texture2D" uid="uid://t0ktfme6nved" path="res://images/Handphone/handphone_off.png" id="2_uqxim"]
+[ext_resource type="Texture2D" uid="uid://ducstjl2f6w88" path="res://images/kenney_btn/Tilemap/tilemap.png" id="4_jm186"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jm186"]
+atlas = ExtResource("2_uqxim")
+region = Rect2(320, 0, 320, 180)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b8udc"]
+atlas = ExtResource("2_uqxim")
+region = Rect2(0, 0, 320, 180)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bcxy0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_kdf8y")
+}],
+"loop": true,
+"name": &"off",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jm186")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b8udc")
+}],
+"loop": true,
+"name": &"on",
+"speed": 4.0
+}]
+
+[sub_resource type="InputEventAction" id="InputEventAction_nkxbk"]
+action = &"hp"
+
+[sub_resource type="Shortcut" id="Shortcut_dgbmx"]
+events = [SubResource("InputEventAction_nkxbk")]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vqoix"]
+atlas = ExtResource("4_jm186")
+region = Rect2(391, 187, 16, 16)
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_jm186"]
+
+[node name="Control" type="Control"]
+texture_filter = 1
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="hp_spoiler" type="StaticBody2D" parent="."]
+position = Vector2(571, 283)
+script = ExtResource("1_j17uf")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="hp_spoiler"]
+position = Vector2(-571, -283)
+scale = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_bcxy0")
+animation = &"on"
+autoplay = "off"
+frame_progress = 0.17776498
+
+[node name="Button" type="TextureButton" parent="hp_spoiler"]
+texture_filter = 1
+offset_left = -376.0
+offset_top = -232.0
+offset_right = -310.26813
+offset_bottom = -158.13516
+scale = Vector2(1.3539854, 1.2455177)
+toggle_mode = true
+action_mode = 0
+button_mask = 0
+shortcut = SubResource("Shortcut_dgbmx")
+texture_normal = SubResource("AtlasTexture_vqoix")
+ignore_texture_size = true
+stretch_mode = 4
+
+[node name="LifetimeTimer" type="Timer" parent="hp_spoiler"]
+wait_time = 2.0
+
+[node name="SpoilerBar" type="TextureProgressBar" parent="hp_spoiler"]
+z_index = -1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -380.0
+offset_top = -235.0
+offset_right = -290.0
+offset_bottom = -149.0
+grow_horizontal = 2
+grow_vertical = 2
+value = 100.0
+fill_mode = 4
+nine_patch_stretch = true
+texture_progress = SubResource("CanvasTexture_jm186")

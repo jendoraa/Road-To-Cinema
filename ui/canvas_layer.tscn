@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://cl3yp23mx85nq"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_wf015"]
+
+[node name="CanvasLayer" type="CanvasLayer"]
+
+[node name="ScoreLabel" type="Label" parent="."]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_bottom = 23.0
+grow_horizontal = 0
+text = "Score: 0"
+label_settings = SubResource("LabelSettings_wf015")

@@ -1,0 +1,80 @@
+[gd_scene load_steps=12 format=3 uid="uid://d2hdh84d4dqb5"]
+
+[ext_resource type="Script" uid="uid://dkjsks5e0y46f" path="res://player/player.gd" id="1_i3pqv"]
+[ext_resource type="Texture2D" uid="uid://erxngxyh8inl" path="res://images/character/mc_idle.png" id="2_hqtel"]
+[ext_resource type="Texture2D" uid="uid://ceg2wg75puj3d" path="res://images/character/mc_walkingsheet.png" id="2_i3pqv"]
+[ext_resource type="Script" uid="uid://wv7j4rspmfop" path="res://player/camera_2d.gd" id="3_sweqy"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1bvp3"]
+size = Vector2(175.74374, 207.20142)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dw050"]
+atlas = ExtResource("2_hqtel")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hqtel"]
+atlas = ExtResource("2_i3pqv")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sweqy"]
+atlas = ExtResource("2_i3pqv")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2hs0m"]
+atlas = ExtResource("2_i3pqv")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1jxqw"]
+atlas = ExtResource("2_i3pqv")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_n7ghd"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dw050")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hqtel")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sweqy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2hs0m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1jxqw")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 4.0
+}]
+
+[node name="Player" type="CharacterBody2D"]
+z_index = 7
+texture_filter = 1
+scale = Vector2(0.51210934, 0.6134034)
+script = ExtResource("1_i3pqv")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-17.574364, -36.600693)
+scale = Vector2(1, 0.9999999)
+shape = SubResource("RectangleShape2D_1bvp3")
+
+[node name="Icon" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+position = Vector2(7.6293945e-06, -32.604977)
+scale = Vector2(7.8089247, 6.534129)
+sprite_frames = SubResource("SpriteFrames_n7ghd")
+animation = &"idle"
+autoplay = "walk"
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(0, -313.0077)
+script = ExtResource("3_sweqy")

@@ -1,0 +1,66 @@
+[gd_scene load_steps=9 format=3 uid="uid://cehhwprsxatuo"]
+
+[ext_resource type="Script" uid="uid://c13wpk5fkgi4d" path="res://ui/pause_menu.gd" id="1_hdmo1"]
+[ext_resource type="Texture2D" uid="uid://sbt3gri45wpc" path="res://images/Menu/menu_clicked.png" id="2_nwcfo"]
+[ext_resource type="Texture2D" uid="uid://bfvk7pswrsw0d" path="res://images/Menu/menu_continue.png" id="3_p81d2"]
+[ext_resource type="Texture2D" uid="uid://bdtsvqmtb0ohe" path="res://images/Menu/menu_home.png" id="4_2nc7s"]
+[ext_resource type="Texture2D" uid="uid://b83wh53eqqojw" path="res://images/Home/home_exit.png" id="5_2nc7s"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d3xb4"]
+atlas = ExtResource("3_p81d2")
+region = Rect2(98, 45, 115, 35)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mxa3g"]
+atlas = ExtResource("4_2nc7s")
+region = Rect2(98, 94, 115, 35)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e8sti"]
+atlas = ExtResource("5_2nc7s")
+region = Rect2(98, 124, 115, 35)
+
+[node name="PauseMenu" type="CanvasLayer"]
+process_mode = 3
+script = ExtResource("1_hdmo1")
+
+[node name="CenterContainer" type="Control" parent="."]
+texture_filter = 1
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MenuClicked" type="Sprite2D" parent="CenterContainer"]
+z_index = -1
+texture_filter = 1
+position = Vector2(752, 361)
+scale = Vector2(4.2000003, 4.022222)
+texture = ExtResource("2_nwcfo")
+
+[node name="resume" type="TextureButton" parent="CenterContainer"]
+layout_mode = 0
+offset_left = 560.0
+offset_top = 220.0
+offset_right = 880.0
+offset_bottom = 316.0
+texture_normal = SubResource("AtlasTexture_d3xb4")
+stretch_mode = 0
+
+[node name="home" type="TextureButton" parent="CenterContainer"]
+layout_mode = 0
+offset_left = 560.0
+offset_top = 300.0
+offset_right = 880.0
+offset_bottom = 396.0
+texture_normal = SubResource("AtlasTexture_mxa3g")
+stretch_mode = 0
+
+[node name="quit" type="TextureButton" parent="CenterContainer"]
+layout_mode = 0
+offset_left = 560.0
+offset_top = 400.0
+offset_right = 880.0
+offset_bottom = 496.0
+texture_normal = SubResource("AtlasTexture_e8sti")
+stretch_mode = 0

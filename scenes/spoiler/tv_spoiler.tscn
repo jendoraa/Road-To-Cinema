@@ -1,0 +1,70 @@
+[gd_scene load_steps=8 format=3 uid="uid://0njj1ouoqlrl"]
+
+[ext_resource type="Script" uid="uid://c0exbofx4ajwo" path="res://scenes/spoiler/tv_spoiler.gd" id="1_crfag"]
+[ext_resource type="Texture2D" uid="uid://ducstjl2f6w88" path="res://images/kenney_btn/Tilemap/tilemap.png" id="3_huh01"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_q6mc3"]
+size = Vector2(50.167274, 32.227753)
+
+[sub_resource type="InputEventAction" id="InputEventAction_nkxbk"]
+action = &"tv"
+
+[sub_resource type="Shortcut" id="Shortcut_71owc"]
+events = [SubResource("InputEventAction_nkxbk")]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nkxbk"]
+atlas = ExtResource("3_huh01")
+region = Rect2(408, 187, 15, 15)
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_71owc"]
+
+[node name="tv_spoiler" type="StaticBody2D"]
+texture_filter = 1
+scale = Vector2(2.4119308, 2.1410117)
+script = ExtResource("1_crfag")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-0.20730384, -34.79664)
+shape = SubResource("RectangleShape2D_q6mc3")
+
+[node name="LifetimeTimer" type="Timer" parent="."]
+wait_time = 2.0
+
+[node name="Button" type="TextureButton" parent="."]
+z_index = 2
+texture_filter = 1
+offset_left = -4.975267
+offset_top = -44.83862
+offset_right = 1.7376423
+offset_bottom = -37.967747
+scale = Vector2(1.4420128, 1.3595617)
+toggle_mode = true
+action_mode = 0
+button_mask = 0
+shortcut = SubResource("Shortcut_71owc")
+texture_normal = SubResource("AtlasTexture_nkxbk")
+ignore_texture_size = true
+stretch_mode = 4
+
+[node name="SpoilerBar" type="TextureProgressBar" parent="."]
+z_index = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -5.804478
+offset_top = -45.77276
+offset_right = 6.2190833
+offset_bottom = -33.628967
+grow_horizontal = 2
+grow_vertical = 2
+value = 100.0
+fill_mode = 4
+nine_patch_stretch = true
+texture_progress = SubResource("CanvasTexture_71owc")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

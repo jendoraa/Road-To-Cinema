@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://bs2gxa72jg8ou"]
+
+[ext_resource type="Texture2D" uid="uid://c2yo33vf6uj8m" path="res://images/Background/langit.png" id="1_puckc"]
+
+[node name="MotionBackground" type="ParallaxBackground"]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="."]
+position = Vector2(0, -8)
+motion_scale = Vector2(0.2, 1)
+motion_mirroring = Vector2(1920, 0)
+
+[node name="Langit" type="Sprite2D" parent="ParallaxLayer"]
+texture_filter = 1
+position = Vector2(960, -352)
+scale = Vector2(6, 4)
+texture = ExtResource("1_puckc")

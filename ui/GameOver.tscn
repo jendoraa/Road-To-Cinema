@@ -1,0 +1,53 @@
+[gd_scene load_steps=6 format=3 uid="uid://bielxr63cdq2e"]
+
+[ext_resource type="Script" uid="uid://be005ojvsverb" path="res://ui/game_over.gd" id="1_40baj"]
+[ext_resource type="Texture2D" uid="uid://da613hfkwn8oo" path="res://images/homescreen.png" id="4_rik4a"]
+[ext_resource type="Texture2D" uid="uid://bdtsvqmtb0ohe" path="res://images/Menu/menu_home.png" id="4_ua7od"]
+[ext_resource type="Texture2D" uid="uid://dlqi32c2fjtv1" path="res://images/Home/home_menu.png" id="5_dpy0x"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rr04i"]
+atlas = ExtResource("4_ua7od")
+region = Rect2(98, 94, 115, 35)
+
+[node name="CanvasLayer" type="CanvasLayer"]
+process_mode = 3
+
+[node name="GameOver" type="Control" parent="."]
+z_index = 5
+texture_filter = 1
+layout_mode = 3
+anchors_preset = 0
+offset_left = -56.0
+offset_top = 67.0
+offset_right = -16.0
+offset_bottom = 107.0
+script = ExtResource("1_40baj")
+
+[node name="TextureRect" type="TextureRect" parent="GameOver"]
+z_index = 7
+layout_mode = 0
+offset_left = 240.00002
+offset_top = 77.000015
+offset_right = 1330.0
+offset_bottom = 598.0
+scale = Vector2(0.9820954, 0.9857651)
+texture = ExtResource("5_dpy0x")
+
+[node name="home" type="TextureButton" parent="GameOver"]
+z_index = 8
+layout_mode = 0
+offset_left = 573.0
+offset_top = 295.0
+offset_right = 945.0
+offset_bottom = 502.0
+texture_normal = SubResource("AtlasTexture_rr04i")
+stretch_mode = 0
+
+[node name="Homescreen" type="Sprite2D" parent="GameOver"]
+z_index = 1
+texture_filter = 1
+position = Vector2(740, 293)
+scale = Vector2(4.275, 3.9999998)
+texture = ExtResource("4_rik4a")
+
+[connection signal="pressed" from="GameOver/home" to="GameOver" method="_on_home_pressed"]
